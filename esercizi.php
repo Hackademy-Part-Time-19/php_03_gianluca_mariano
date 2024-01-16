@@ -6,7 +6,7 @@ class Company {
     public $name;
     public $location;
     public $tot_employees;
-    public static $annual_Expenses_Tot;
+   
     public static $avg_wage = 1500;
     public static $absolute_total = 0;
 
@@ -48,13 +48,27 @@ class Company {
 
         echo("L'azienda " . $this->name . " ha speso " . $this->annualExpense($months) . " euro \n" );
 
+        echo("Il costo di tutte le aziende è " . $this->annualExpensesTot($months) . " euro \n");
 
     }
 
 
-    public function annualExpensesTot() {
+    public function annualExpensesTot($months) {
 
-        return self::$annual_Expenses_Tot += $this->__annualExpense();
+        return self::$absolute_total += $this->annualExpense($months);
+
+    }
+
+    public function calculatedFinal() {
+
+        return self::$absolute_total;
+
+    }
+
+
+    public static function printCalculatedFinal() {
+
+        echo("Le spese totali di tutte le aziende sono di " . self::$absolute_total . " euro \n");
 
 
     }
@@ -76,8 +90,14 @@ $azienda5 = new Company("Azienda_5","Spagna",64);
 
 //$azienda1->annualExpense();
 
-echo ($azienda1->printAnnualExpense());
+$azienda1->printAnnualExpense();
+$azienda2->printAnnualExpense();
+$azienda3->printAnnualExpense();
+$azienda4->printAnnualExpense();
+$azienda5->printAnnualExpense();
 
+
+$azienda5->printCalculatedFinal();
 
 
 
