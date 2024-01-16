@@ -6,8 +6,10 @@ class Company {
     public $name;
     public $location;
     public $tot_employees;
+    public static $annual_Expenses_Tot;
     public static $avg_wage = 1500;
     public static $absolute_total = 0;
+
 
 
     public function __construct($_name,$_location,$_tot_employees) {
@@ -18,7 +20,7 @@ class Company {
 
     }
 
-    public function __employeesEcho() {
+    public function employeesEcho() {
 
         if ($this->tot_employees != 0){
 
@@ -34,11 +36,26 @@ class Company {
 
     }
 
-    public function __annualExpense() {
+    public function annualExpense($months) {
 
-        $annual_expense_value = self::$avg_wage * $this->tot_employees;
+        $annual_expense_value = (self::$avg_wage * $months) * $this->tot_employees;
 
-        echo("\n" . $annual_expense_value);
+        return $annual_expense_value;
+
+    }
+
+    public function printAnnualExpense($months = 12) {
+
+        echo("L'azienda " . $this->name . " ha speso " . $this->annualExpense($months) . " euro \n" );
+
+
+    }
+
+
+    public function annualExpensesTot() {
+
+        return self::$annual_Expenses_Tot += $this->__annualExpense();
+
 
     }
 
@@ -55,8 +72,12 @@ $azienda4 = new Company("Azienda_4","Germania",44);
 $azienda5 = new Company("Azienda_5","Spagna",64);
 
 
-$azienda1->__employeesEcho();
+//$azienda1->employeesEcho();
 
-$azienda1->__annualExpense();
+//$azienda1->annualExpense();
+
+echo ($azienda1->printAnnualExpense());
+
+
 
 
